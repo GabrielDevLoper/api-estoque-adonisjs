@@ -23,3 +23,4 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/login', 'AuthController.login')
 
 Route.resource('/usuarios', 'UsuariosController').apiOnly()
+Route.resource('/perfis', 'PerfisController').apiOnly()
