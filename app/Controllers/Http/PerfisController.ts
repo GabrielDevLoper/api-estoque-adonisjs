@@ -20,10 +20,14 @@ export default class PerfisController {
     return perfil
   }
 
-  public async show({ params }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     const { id } = params;
 
-    const perfil = await Perfil.findOrFail(id)
+    const perfil = await Perfil.find(id)
+
+    if (!perfil) {
+      return response.notFound({ message: 'Perfil não encontrado' })
+    }
 
     return perfil
   }
@@ -55,7 +59,7 @@ export default class PerfisController {
       return response.notFound({ message: 'Perfil não encontrado' })
     }
 
-    perfil.delete()
+    await perfil.delete()
 
     return ;
   }
