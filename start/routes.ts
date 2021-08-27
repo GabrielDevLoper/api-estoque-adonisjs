@@ -24,3 +24,4 @@ Route.post('/login', 'AuthController.login')
 
 Route.resource('/usuarios', 'UsuariosController').apiOnly()
 Route.resource('/perfis', 'PerfisController').apiOnly()
+Route.resource('/categorias', 'CategoriasController').apiOnly()
