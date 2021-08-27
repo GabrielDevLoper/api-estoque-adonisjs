@@ -24,6 +24,10 @@ export default class CreateUsuarioValidator {
 	password: schema.string({}, [
 		rules.required(),
 	  ]),
+
+	id_perfil: schema.number([
+		rules.required(),
+	  ]),
   })
 
   public messages = {

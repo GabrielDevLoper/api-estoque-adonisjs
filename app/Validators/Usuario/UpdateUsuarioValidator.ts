@@ -18,7 +18,6 @@ export default class UpdateUsuarioValidator {
 	email: schema.string({}, [
 		rules.unique({ table: 'usuarios', column: 'email', whereNot: { id: this.refs.id } }),
 	  ]), 
-	 
   })
 
 	

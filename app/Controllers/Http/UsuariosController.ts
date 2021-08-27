@@ -5,13 +5,13 @@ import UpdateUsuarioValidator from 'App/Validators/Usuario/UpdateUsuarioValidato
 
 export default class UsuariosController {
   public async index({ }: HttpContextContract) {
-    const usuarios = await Usuario.all()
+    const usuarios = await Usuario.query().preload('perfil')
 
     return usuarios
   }
 
   public async store({ request }: HttpContextContract) {
-    const data = request.only(['nome', 'cpf', 'email', 'password'])
+    const data = request.only(['nome', 'cpf', 'email', 'password', 'id_perfil'])
 
     await request.validate(CreateUsuarioValidator)
 
@@ -24,7 +24,7 @@ export default class UsuariosController {
   public async show({ params, response }: HttpContextContract) { 
     const { id } = params
 
-    const usuario = await Usuario.find(id)
+    const usuario = await Usuario.query().where('id', id).preload('perfil')
 
     if(!usuario){
       return response.notFound({ message: 'Usuário não encontrado' })
@@ -42,7 +42,7 @@ export default class UsuariosController {
       return response.notFound({ message: 'Usuário não encontrado' })
     }
 
-    const data = request.only(['nome','cpf','email','password'])
+    const data = request.only(['nome','cpf','email','password','id_perfil'])
 
     await request.validate(UpdateUsuarioValidator)
 
