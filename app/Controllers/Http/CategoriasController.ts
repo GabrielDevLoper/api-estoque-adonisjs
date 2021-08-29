@@ -14,17 +14,48 @@ export default class CategoriasController {
 
     await request.validate(CreateCategoriaValidator)
 
-    const usuario = await Categoria.create(data)
+    const categoria = await Categoria.create(data)
 
-    return usuario
+    return categoria
   }
 
-  public async show ({}: HttpContextContract) {
+  public async show ({ params, response }: HttpContextContract) {
+    const { id } = params
+
+    const categoria = await Categoria.find(id)
+
+    if(!categoria){
+      return response.notFound({ message: 'Categoria não encontrada'})
+    }
+
+    return categoria
   }
 
-  public async update ({}: HttpContextContract) {
+  public async update ({ params, request, response }: HttpContextContract) {
+    const { id } = params
+
+    const categoria = await Categoria.find(id)
+
+    if(!categoria){
+      return response.notFound({ message: 'Categoria não encontrada'})
+    }
+
+    const data = request.only(['nome'])
+
+    await categoria.merge(data).save()
   }
 
-  public async destroy ({}: HttpContextContract) {
+  public async destroy ({ params , response}: HttpContextContract) {
+    const { id } = params
+
+    const categoria = await Categoria.find(id)
+
+    if(!categoria){
+      return response.notFound({ message: 'Categoria não encontrada'})
+    }
+
+    await categoria.delete()
+
+    return 
   }
 }
