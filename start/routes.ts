@@ -22,6 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/login', 'AuthController.login')
 
-Route.resource('/usuarios', 'UsuariosController').apiOnly()
-Route.resource('/perfis', 'PerfisController').apiOnly()
-Route.resource('/categorias', 'CategoriasController').apiOnly()
+Route.group(() => {
+    Route.resource('/usuarios', 'UsuariosController').apiOnly()
+    Route.resource('/perfis', 'PerfisController').apiOnly()
+    Route.resource('/categorias', 'CategoriasController').apiOnly()
+    Route.resource('/produtos', 'ProdutosController').apiOnly()
+}).middleware('auth')

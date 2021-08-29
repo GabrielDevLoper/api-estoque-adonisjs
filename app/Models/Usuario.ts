@@ -4,6 +4,8 @@ import { column, beforeSave, BaseModel, beforeUpdate, hasOne, HasOne } from '@io
 import Perfil from './Perfil'
 
 export default class Usuario extends BaseModel {
+  public static table = 'usuarios'
+
   @column({ isPrimary: true })
   public id: number
 

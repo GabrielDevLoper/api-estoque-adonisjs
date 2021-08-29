@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Categoria from 'App/Models/Categoria'
 import CreateCategoriaValidator from 'App/Validators/Categoria/CreateCategoriaValidator'
+import UpdateCategoriaValidator from 'App/Validators/Categoria/UpdateCategoriaValidator'
 
 export default class CategoriasController {
   public async index ({}: HttpContextContract) {
@@ -33,6 +34,8 @@ export default class CategoriasController {
 
   public async update ({ params, request, response }: HttpContextContract) {
     const { id } = params
+
+    await request.validate(UpdateCategoriaValidator)
 
     const categoria = await Categoria.find(id)
 
