@@ -13,7 +13,6 @@ export default class CreateProdutoValidator {
 
 	nome: schema.string({}, [
 		rules.required(),
-		
 	  ]),
 
 	quantidade_disponivel: schema.number([
