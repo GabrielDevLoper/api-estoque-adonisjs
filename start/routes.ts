@@ -10,6 +10,8 @@ Route.group(() => {
     Route.resource('/categorias', 'CategoriasController').apiOnly()
     Route.resource('/produtos', 'ProdutosController').apiOnly()
   })
+    .middleware('admin')
+    .middleware('gestor')
 
   // Rotas que usuarios com permissão de adm podem acessar
   Route.group(() => {
